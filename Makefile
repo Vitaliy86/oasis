@@ -186,8 +186,8 @@ purge-circular-symlinks:
 	done ; \
 	}
 
-.PHONY: build-OASIS
-build-OASIS: ## Build OASIS-openwrt kernel module and packages
+.PHONY: build-oasis
+build-oasis: ## Build OASIS-openwrt kernel module and packages
 	@{ \
 	set -ex ; \
 	cd $(OPENWRT_SRCDIR) ; \
@@ -206,27 +206,27 @@ build-OASIS: ## Build OASIS-openwrt kernel module and packages
 	./scripts/feeds update ; \
 	./scripts/feeds install -a ; \
 	mv .config.old .config ; \
-	echo "CONFIG_PACKAGE_oasis-mod-tool=m" >> .config ; \
 	echo "CONFIG_PACKAGE_oasis=y" >> .config ; \
+	echo "CONFIG_PACKAGE_oasis-mod-tool=m" >> .config ; \
 	echo "CONFIG_PACKAGE_oasis-mod-spring=y" >> .config ; \
 	echo "CONFIG_PACKAGE_luci-app-oasis=y" >> .config ; \
 	make defconfig ; \
-	make V=s package/oasis-mod-tool/clean ; \
-	make V=s package/oasis-mod-tool/download ; \
-	make V=s package/oasis-mod-tool/prepare ; \
-	make V=s package/oasis-mod-tool/compile ; \
 	make V=s package/oasis/clean ; \
 	make V=s package/oasis/download ; \
 	make V=s package/oasis/prepare ; \
 	make V=s package/oasis/compile ; \
-	make V=s package/luci-app-oasis/clean ; \
-	make V=s package/luci-app-oasis/download ; \
-	make V=s package/luci-app-oasis/prepare ; \
-	make V=s package/luci-app-oasis/compile ; \
+	make V=s package/oasis-mod-tool/clean ; \
+	make V=s package/oasis-mod-tool/download ; \
+	make V=s package/oasis-mod-tool/prepare ; \
+	make V=s package/oasis-mod-tool/compile ; \
 	make V=s package/oasis-mod-spring/clean ; \
 	make V=s package/oasis-mod-spring/download ; \
 	make V=s package/oasis-mod-spring/prepare ; \
 	make V=s package/oasis-mod-spring/compile ; \
+	make V=s package/luci-app-oasis/clean ; \
+	make V=s package/luci-app-oasis/download ; \
+	make V=s package/luci-app-oasis/prepare ; \
+	make V=s package/luci-app-oasis/compile ; \
 	}
 
 .PHONY: prepare-artifacts
