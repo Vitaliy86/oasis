@@ -50,6 +50,11 @@ jobs:
       OPENWRT_VERMAGIC: ${{ matrix.build_env.vermagic }}
 
     steps:
+      - name: Upgrade CMake
+        run: |
+         pip install --upgrade cmake
+         cmake --version
+         
       - name: Install Go
         uses: actions/setup-go@v5
         with:
